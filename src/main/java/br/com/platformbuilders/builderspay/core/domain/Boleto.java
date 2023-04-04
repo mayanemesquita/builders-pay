@@ -18,7 +18,6 @@ public record Boleto(
         BigDecimal valorJuros,
         BigDecimal valorMulta,
         String tipoBoleto
-
 ) {
 
     public static void validarBoleto(LocalDate dataPagamento, LocalDate dataVencimento, String tipoBoleto) {
@@ -32,6 +31,7 @@ public record Boleto(
         final BigDecimal percentualMulta = new BigDecimal("0.02");
         final BigDecimal percentualJuros = new BigDecimal("0.01");
         long diasAtaso = ChronoUnit.DAYS.between(dataVencimento, dataPagamento);
+
         BigDecimal multa = valorOriginal.multiply(percentualMulta).setScale(2, RoundingMode.FLOOR);
 
         BigDecimal juros = (valorOriginal.multiply(percentualJuros)

@@ -1,7 +1,6 @@
 package br.com.platformbuilders.builderspay.application.adapters.gateways;
 
 import br.com.platformbuilders.builderspay.application.adapters.presenters.BoletoMapper;
-import br.com.platformbuilders.builderspay.application.config.database.BoletoEntity;
 import br.com.platformbuilders.builderspay.application.config.database.BoletoRepository;
 import br.com.platformbuilders.builderspay.core.domain.Boleto;
 import br.com.platformbuilders.builderspay.core.ports.BoletoJPAGateway;
@@ -18,6 +17,6 @@ public class BoletoJPAGatewayImpl implements BoletoJPAGateway {
 
     @Override
     public void salvar(Boleto boleto) {
-        BoletoEntity boletoEntity = boletoRepository.save(Mappers.getMapper(BoletoMapper.class).fromDomain(boleto));
+      boletoRepository.save(Mappers.getMapper(BoletoMapper.class).fromDomain(boleto));
     }
 }

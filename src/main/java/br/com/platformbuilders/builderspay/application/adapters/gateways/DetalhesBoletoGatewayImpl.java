@@ -6,6 +6,8 @@ import br.com.platformbuilders.builderspay.application.config.integrations.Token
 import br.com.platformbuilders.builderspay.application.config.integrations.TokenClient;
 import br.com.platformbuilders.builderspay.core.ports.DetalhesBoletoGateway;
 import feign.FeignException;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.NotAuthorizedException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,7 @@ public class DetalhesBoletoGatewayImpl implements DetalhesBoletoGateway {
             detalhe = boletoClient.buscarDetalhesBoleto(boletoAPI, token);
         } catch (FeignException.BadRequest badRequest) {
             log.error("Erro ao buscar detalhes do Boleto", badRequest);
-
+            throw new BadRequestException("Erro ao buscar detalhes do Boleto", badRequest);
         }
         return detalhe;
     }
@@ -38,9 +40,10 @@ public class DetalhesBoletoGatewayImpl implements DetalhesBoletoGateway {
         String token = null;
         try {
             token = tokenClient.getToken(
-                    new TokenAPI("bd753592-cf9b-4d1a-96b9-cb8b2c01bd1", "4e8229fe-1131-439c-9846-799895a8be5b")).getToken();
+                    new TokenAPI("bd753592-cf9b-4d1a-96b9-cb8b2c01bd12", "4e8229fe-1131-439c-9846-799895a8be5b")).getToken();
         } catch (FeignException.Unauthorized unauthorized) {
             log.error("Erro na API de Autenticação", unauthorized);
+            throw new NotAuthorizedException("Erro na API de Autenticação", unauthorized);
         }
         return token;
     }
@@ -51,3 +54,6 @@ public class DetalhesBoletoGatewayImpl implements DetalhesBoletoGateway {
         return boletoAPI;
     }
 }
+
+
+
