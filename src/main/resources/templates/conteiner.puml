@@ -1,11 +1,6 @@
 @startuml C4_Elements
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 Title "Contexto do App Builders Pay - Comunicaçao Ampla"
-Person(personAlias, "Usuário", "Realiza a consulta do boleto")
-System(systemBuildersPay, "Builders Pay App", "Realiza o cálculo de juros e multas do boleto conforme consulta")
-System_Ext(systemBoletosApi, "Boletos Api", "Retorna as informações do Boleto consultado")
 
-Rel(personAlias, systemBuildersPay, "Uses", "HTTPS")
-Rel(systemBuildersPay, systemBoletosApi, "Uses", "HTTPs")
 SHOW_LEGEND()
 @enduml

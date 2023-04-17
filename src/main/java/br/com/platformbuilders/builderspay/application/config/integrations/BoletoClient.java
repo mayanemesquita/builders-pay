@@ -1,6 +1,6 @@
 package br.com.platformbuilders.builderspay.application.config.integrations;
 
-import feign.Headers;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
